@@ -6,6 +6,13 @@ const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
 
+const currencySelect = document.getElementById('currency');
+let currency  = 'TND'
+currencySelect.addEventListener('change', (e)=>{
+    currency = e.target.value
+    updateValues();
+})
+
 //const dummyTransactions= [
 //    {id: 1, text:'Flower', amount: -20},
 //    {id: 2, text:'Salary', amount: 300},
@@ -28,7 +35,8 @@ function addTransaction(e){
         const transaction = { 
             id: generateID(),
             text: text.value,
-            amount: +amount.value
+            amount: +amount.value,
+            createdAt: new Date()
         };
 
        
@@ -63,9 +71,13 @@ function addTransactionDOM(transaction){
 
     item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
 
+    let {id, text, amount, createdAt} = transaction;
+    let time = new Date(createdAt);
+    let timerender = time.toLocaleDateString() + " " + time.toLocaleTimeString()
+
     item.innerHTML = `
-    ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}
-    </span> <button class= "delete-btn" onclick="removeTransaction(${transaction.id})">x</button>
+    ${text} <span>${sign}${Math.abs(amount)}
+    </span> <span id="timestamp">${timerender}</span> <button class= "delete-btn" onclick="removeTransaction(${id})">✖</button>
     `;
     list.appendChild(item);
 }
@@ -88,9 +100,9 @@ function updateValues(){
                     .reduce((acc,item) => (acc +=item), 0) * -1)
                     .toFixed(2);      
                     
-    balance.innerText =  `${total} DT`;
-    money_plus.innerText = `${income} DT`;
-    money_minus.innerText = `${expense} DT`;    
+    balance.innerText =  `${total} ${currency}`;
+    money_plus.innerText = `${income} ${currency}`;
+    money_minus.innerText = `${expense} ${currency}`;    
     
     if ( total < 0 ){
         console.log('negative')
