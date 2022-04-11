@@ -6,6 +6,13 @@ const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
 
+const currencySelect = document.getElementById('currency');
+let currency  = 'TND'
+currencySelect.addEventListener('change', (e)=>{
+    currency = e.target.value
+    updateValues();
+})
+
 //const dummyTransactions= [
 //    {id: 1, text:'Flower', amount: -20},
 //    {id: 2, text:'Salary', amount: 300},
@@ -88,9 +95,9 @@ function updateValues(){
                     .reduce((acc,item) => (acc +=item), 0) * -1)
                     .toFixed(2);      
                     
-    balance.innerText =  `${total} DT`;
-    money_plus.innerText = `${income} DT`;
-    money_minus.innerText = `${expense} DT`;    
+    balance.innerText =  `${total} ${currency}`;
+    money_plus.innerText = `${income} ${currency}`;
+    money_minus.innerText = `${expense} ${currency}`;    
     
     if ( total < 0 ){
         console.log('negative')

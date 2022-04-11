@@ -151,3 +151,17 @@ input[type='text'], input[type='number']{
 .negative{
     color: rgb(255, 84, 96);
 }
+
+.currency-select {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.currency-select select {
+    border: 1px solid #dedede;
+    border-radius: 2px;
+    padding: 2px 14px;
+    height: 40px;
+}
