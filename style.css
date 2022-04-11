@@ -114,8 +114,10 @@ input[type='text'], input[type='number']{
     background-color: white;
     box-shadow: var(--box-shadow);
     color: #333;
+    height: 46px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: relative;
     padding: 10px;
     margin: 10px 0;
@@ -127,6 +129,14 @@ input[type='text'], input[type='number']{
 
 .list li.plus{ 
     border-right: 5px solid rgb(65, 220, 101);
+}
+
+#timestamp {
+    position: absolute;
+    color: #bbb;
+    font-size: 12px;
+    bottom: 0;
+    right: 10px;
 }
 
 .delete-btn{

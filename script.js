@@ -35,7 +35,8 @@ function addTransaction(e){
         const transaction = { 
             id: generateID(),
             text: text.value,
-            amount: +amount.value
+            amount: +amount.value,
+            createdAt: new Date()
         };
 
        
@@ -70,9 +71,13 @@ function addTransactionDOM(transaction){
 
     item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
 
+    let {id, text, amount, createdAt} = transaction;
+    let time = new Date(createdAt);
+    let timerender = time.toLocaleDateString() + " " + time.toLocaleTimeString()
+
     item.innerHTML = `
-    ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}
-    </span> <button class= "delete-btn" onclick="removeTransaction(${transaction.id})">✖</button>
+    ${text} <span>${sign}${Math.abs(amount)}
+    </span> <span id="timestamp">${timerender}</span> <button class= "delete-btn" onclick="removeTransaction(${id})">✖</button>
     `;
     list.appendChild(item);
 }
